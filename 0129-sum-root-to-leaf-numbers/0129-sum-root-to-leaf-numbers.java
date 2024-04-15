@@ -15,23 +15,23 @@
  */
 class Solution {
     public int sumNumbers(TreeNode root) {
-        int[] sum = new int[1];
-        StringBuilder str = new StringBuilder();
-        solve(root,sum,str);
-        return sum[0];
+        StringBuilder num = new StringBuilder("");
+        int[] ans = new int[1];
+        solve(root,ans,num);
+        return ans[0];
     }
     
-    public void solve(TreeNode root,int[] sum,StringBuilder str){
-        if(root==null)return;
-        str.append(Integer.toString(root.val));
-        if(root.left==null && root.right==null){
-            sum[0]+=Integer.parseInt(str.toString());
-            str.delete(str.length()-1,str.length());
+    public void solve(TreeNode node,int[] ans,StringBuilder num){
+        if(node==null)return;
+        num.append(Integer.toString(node.val));
+        if(node.left==null && node.right==null){
+            if(num.length()==0)return;
+            ans[0]+=Integer.parseInt(num.toString());
+            num.delete(num.length()-1,num.length());
             return;
         }
-        solve(root.left,sum,str);
-        solve(root.right,sum,str);
-        str.delete(str.length()-1,str.length());
-        return;
+        solve(node.left,ans,num);
+        solve(node.right,ans,num);
+        num.delete(num.length()-1,num.length());
     }
 }
