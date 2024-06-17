@@ -1,13 +1,11 @@
 class Solution {
     public boolean judgeSquareSum(int c) {
-        long left =0;
-        long right =(long) Math.sqrt(c);
-        long sum;
-        while(left<=right){
-            sum = left*left+right*right;
-            if(sum==c)return true;
-            else if(sum<c)left++;
-            else right--;
+        HashMap<Long,Integer> map = new HashMap<>();
+        for(long i=0;i*i<=c;i++){
+            map.put(i*i,(int)i);
+        }
+        for(long i : map.keySet()){
+            if(map.getOrDefault(c-i,-1)!=-1)return true;
         }
         return false;
     }
