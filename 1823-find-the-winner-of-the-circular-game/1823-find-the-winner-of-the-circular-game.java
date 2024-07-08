@@ -1,23 +1,16 @@
 class Solution {
     public int findTheWinner(int n, int k) {
-        boolean[] lost = new boolean[n];
-        int count=0,i=0,j;
-        while(count<n-1){
-            while(lost[i])i=(i+1)%n;
-            j=k;
-            while(j>1){
-                    if(!lost[i]){
-                    j--;
-                }
-                i=(i+1)%n;
+       Queue<Integer> q = new LinkedList<>();
+        for(int i=1;i<=n;i++)q.offer(i);
+        int c;
+        while(q.size()>1){
+            c=k;
+            while(c>1){
+                q.offer(q.poll());
+                c--;
             }
-            while(lost[i])i=(i+1)%n;
-            lost[i]=true;
-            count++;
+            q.poll();
         }
-        for(int p=0;p<n;p++){
-            if(!lost[p])return p+1;
-        }
-        return -1;
+        return q.poll();
     }
 }
