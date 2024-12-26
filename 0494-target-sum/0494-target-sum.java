@@ -1,17 +1,16 @@
 class Solution {
     public int findTargetSumWays(int[] nums, int target) {
         int[] ans = new int[1];
-        solve(nums.length-1,target,nums,ans);
+        solve(nums,0,target,0,ans);
         return ans[0];
     }
     
-    public void solve(int n,int target,int[] nums,int[] ans){
-        if(n==0){
-            if(target-nums[0]==0)ans[0]++;
-            if(target+nums[0]==0)ans[0]++;
+    public void solve(int[] nums,int n,int target,int currSum,int[] ans){
+        if(n==nums.length){
+            if(currSum==target)ans[0]++;
             return;
         }
-        solve(n-1,target+nums[n],nums,ans);
-        solve(n-1,target-nums[n],nums,ans);
+        solve(nums,n+1,target,currSum+nums[n],ans);
+        solve(nums,n+1,target,currSum-nums[n],ans);
     }
- }
+}
